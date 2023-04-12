@@ -73,7 +73,7 @@ export const ProductPage = () => {
   }
   useEffect(() => {
     getProduct()
-  }, [])
+  }, [product, isUpdating])
   const deleteProduct = async () => {
     try {
       await pb.collection('products').delete(product.id)

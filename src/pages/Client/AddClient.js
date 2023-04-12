@@ -26,7 +26,7 @@ export const AddClient = () => {
       const record = await pb.collection('clients').create(formData)
       toast.success('client créé avec succès')
     } catch (error) {
-      toast.error(error)
+      toast.error(error.message)
     }
     navigate('/Clients')
     // Reset form data

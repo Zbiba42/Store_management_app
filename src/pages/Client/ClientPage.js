@@ -35,7 +35,7 @@ export const ClientPage = () => {
       navigate('/Clients')
       toast.success('client supprimé avec succès')
     } catch (error) {
-      toast.error(error)
+      toast.error(error.message)
     }
   }
   useEffect(() => {
@@ -170,12 +170,6 @@ export const ClientPage = () => {
                   Suprimmer
                 </button>
               )}
-              <button
-                className="btn btn-success float-right"
-                style={{ float: 'right' }}
-              >
-                Voir Commandes
-              </button>
             </div>
           </div>
         </div>

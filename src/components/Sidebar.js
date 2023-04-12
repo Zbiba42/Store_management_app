@@ -68,14 +68,8 @@ export const Sidebar = () => {
 
           <div className="foot">
             <div className="link">
-              <Link>
+              <Link to={'/'}>
                 <i className="fas fa-sign-out-alt"></i>Logout
-              </Link>
-            </div>
-
-            <div className="link">
-              <Link>
-                <i className="fas fa-sign-in-alt"></i>Log in
               </Link>
             </div>
 

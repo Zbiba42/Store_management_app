@@ -3,7 +3,8 @@ import PocketBase from 'pocketbase'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import './Clients.css'
-import { Client } from '../components/Client'
+import { Client } from '../../components/Client'
+import { toast } from 'react-toastify'
 export const Clients = () => {
   const [page, setPage] = useState(1)
   const [clients, setClients] = useState([])
@@ -14,7 +15,9 @@ export const Clients = () => {
         `http://127.0.0.1:8090/api/collections/clients/records?page=${page}&perPage=20`
       )
       setClients(data.items)
-    } catch (error) {}
+    } catch (error) {
+      toast.error(error.message)
+    }
   }
   useEffect(() => {
     getData()

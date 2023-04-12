@@ -38,7 +38,7 @@ body{
   width: 82%;
   height: 100%;
   padding: 50px 20px 0px 20px;
-  
+  overflow: scroll;
 }
 .container::-webkit-scrollbar {
   width: 0px;

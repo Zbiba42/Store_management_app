@@ -36,12 +36,12 @@ body{
   float: left;
   /* background-color: grey; */
   width: 82%;
-  height: 100%;
-  padding: 50px 20px 0px 20px;
+  height: calc(100% - 80px);
+  padding: 0px 20px 0px 20px;
   overflow: scroll;
 }
 .container::-webkit-scrollbar {
-  width: 0px;
+  display: none;
 }
 
 .container::-webkit-scrollbar-track {

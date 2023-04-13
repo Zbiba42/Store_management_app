@@ -12,6 +12,7 @@ import { AddProduct } from './pages/Product/AddProduct'
 import { Product } from './components/Product'
 import { ProductPage } from './pages/Product/ProductPage'
 import { LogIn } from './pages/logIn'
+import { SearchResults } from './pages/SearchResults'
 function App() {
   return (
     <>
@@ -30,7 +31,7 @@ function App() {
         />
 
         <Sidebar />
-        {/* <Nav /> */}
+        <Nav />
         <Routes>
           <Route path="/" element={<LogIn />} />
           <Route path="/Clients" element={<Clients />} />
@@ -39,6 +40,7 @@ function App() {
           <Route path="/Produits" element={<Products />} />
           <Route path="/AjouterProduit" element={<AddProduct />} />
           <Route path="/Product" element={<ProductPage />} />
+          <Route path="/Résultats" element={<SearchResults />} />
         </Routes>
       </BrowserRouter>
     </>

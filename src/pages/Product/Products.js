@@ -4,22 +4,28 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Client } from '../../components/Client'
 import { Product } from '../../components/Product'
+import { toast } from 'react-toastify'
 export const Products = () => {
   const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState()
   const [products, setProducts] = useState([])
+  const [sort, setSort] = useState('')
   const pb = new PocketBase('http://127.0.0.1:8090')
   const getData = async () => {
     try {
       const { data } = await axios.get(
-        `http://127.0.0.1:8090/api/collections/products/records?page=${page}&perPage=20`
+        `http://127.0.0.1:8090/api/collections/products/records?sort=${sort}&page=${page}&perPage=5`
       )
-      console.log(data.items)
       setProducts(data.items)
-    } catch (error) {}
+      setPage(data.page)
+      setTotalPages(data.totalPages)
+    } catch (error) {
+      toast.error(error.message)
+    }
   }
   useEffect(() => {
     getData()
-  }, [])
+  }, [page, sort])
   return (
     <>
       <div className="container">
@@ -36,8 +42,106 @@ export const Products = () => {
                 <th scope="col">Nom</th>
                 <th scope="col">Marque</th>
                 <th scope="col">Description</th>
-                <th scope="col">Prix</th>
-                <th scope="col">Objets Restants</th>
+                {/* PRIX */}
+                {sort === '' ? (
+                  <th
+                    style={{ cursor: 'pointer' }}
+                    scope="col"
+                    onClick={() => {
+                      setSort('-prix')
+                    }}
+                  >
+                    Prix
+                  </th>
+                ) : sort === '-prix' ? (
+                  <th
+                    style={{ cursor: 'pointer' }}
+                    scope="col"
+                    onClick={() => {
+                      setSort('+prix')
+                    }}
+                  >
+                    Prix
+                    <i
+                      class="fa-solid fa-arrow-down-long fa-sm"
+                      style={{ marginLeft: '5px' }}
+                    ></i>
+                  </th>
+                ) : sort === '+prix' ? (
+                  <th
+                    style={{ cursor: 'pointer' }}
+                    scope="col"
+                    onClick={() => {
+                      setSort('-prix')
+                    }}
+                  >
+                    Prix
+                    <i
+                      class="fa-solid fa-arrow-up-long fa-sm"
+                      style={{ marginLeft: '5px' }}
+                    ></i>
+                  </th>
+                ) : (
+                  <th
+                    style={{ cursor: 'pointer' }}
+                    scope="col"
+                    onClick={() => {
+                      setSort('-prix')
+                    }}
+                  >
+                    Prix
+                  </th>
+                )}
+                {/* OBJECTS RESTANTS */}
+                {sort === '' ? (
+                  <th
+                    style={{ cursor: 'pointer' }}
+                    scope="col"
+                    onClick={() => {
+                      setSort('-objetsRestants')
+                    }}
+                  >
+                    Objets Restants
+                  </th>
+                ) : sort === '-objetsRestants' ? (
+                  <th
+                    style={{ cursor: 'pointer' }}
+                    scope="col"
+                    onClick={() => {
+                      setSort('+objetsRestants')
+                    }}
+                  >
+                    Objets Restants
+                    <i
+                      class="fa-solid fa-arrow-down-long fa-sm"
+                      style={{ marginLeft: '5px' }}
+                    ></i>
+                  </th>
+                ) : sort === '+objetsRestants' ? (
+                  <th
+                    style={{ cursor: 'pointer' }}
+                    scope="col"
+                    onClick={() => {
+                      setSort('-objetsRestants')
+                    }}
+                  >
+                    Objets Restants
+                    <i
+                      class="fa-solid fa-arrow-up-long fa-sm"
+                      style={{ marginLeft: '5px' }}
+                    ></i>
+                  </th>
+                ) : (
+                  <th
+                    style={{ cursor: 'pointer' }}
+                    scope="col"
+                    onClick={() => {
+                      setSort('-objetsRestants')
+                    }}
+                  >
+                    Objets Restants
+                  </th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -46,6 +150,36 @@ export const Products = () => {
               })}
             </tbody>
           </table>
+        </div>
+        <div className="pagination">
+          {page == 1 ? (
+            <button className="pagination-btn" disabled="true">
+              &lt; Go back
+            </button>
+          ) : (
+            <button
+              className="pagination-btn"
+              onClick={() => {
+                setPage(page - 1)
+              }}
+            >
+              &lt; Go back
+            </button>
+          )}
+          {page >= totalPages ? (
+            <button className="pagination-btn" disabled="true">
+              Go next &gt;
+            </button>
+          ) : (
+            <button
+              className="pagination-btn"
+              onClick={() => {
+                setPage(page + 1)
+              }}
+            >
+              Go next &gt;
+            </button>
+          )}
         </div>
       </div>
     </>

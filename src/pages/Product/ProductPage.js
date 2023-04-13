@@ -73,7 +73,7 @@ export const ProductPage = () => {
   }
   useEffect(() => {
     getProduct()
-  }, [product, isUpdating])
+  }, [isUpdating])
   const deleteProduct = async () => {
     try {
       await pb.collection('products').delete(product.id)
@@ -230,13 +230,6 @@ export const ProductPage = () => {
                   Suprimmer
                 </button>
               )}
-
-              <button
-                className="btn btn-success float-right"
-                style={{ float: 'right' }}
-              >
-                Voir Commandes
-              </button>
             </div>
           </div>
         </div>

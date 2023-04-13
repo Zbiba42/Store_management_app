@@ -7,21 +7,24 @@ import { Client } from '../../components/Client'
 import { toast } from 'react-toastify'
 export const Clients = () => {
   const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState()
   const [clients, setClients] = useState([])
   const pb = new PocketBase('http://127.0.0.1:8090')
   const getData = async () => {
     try {
       const { data } = await axios.get(
-        `http://127.0.0.1:8090/api/collections/clients/records?page=${page}&perPage=20`
+        `http://127.0.0.1:8090/api/collections/clients/records?page=${page}&perPage=10`
       )
       setClients(data.items)
+      setPage(data.page)
+      setTotalPages(data.totalPages)
     } catch (error) {
       toast.error(error.message)
     }
   }
   useEffect(() => {
     getData()
-  })
+  }, [page])
   return (
     <>
       <div className="container">
@@ -48,6 +51,36 @@ export const Clients = () => {
               })}
             </tbody>
           </table>
+        </div>
+        <div className="pagination">
+          {page == 1 ? (
+            <button className="pagination-btn" disabled="true">
+              &lt; Go back
+            </button>
+          ) : (
+            <button
+              className="pagination-btn"
+              onClick={() => {
+                setPage(page - 1)
+              }}
+            >
+              &lt; Go back
+            </button>
+          )}
+          {page >= totalPages ? (
+            <button className="pagination-btn" disabled="true">
+              Go next &gt;
+            </button>
+          ) : (
+            <button
+              className="pagination-btn"
+              onClick={() => {
+                setPage(page + 1)
+              }}
+            >
+              Go next &gt;
+            </button>
+          )}
         </div>
       </div>
     </>

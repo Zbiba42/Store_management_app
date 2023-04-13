@@ -40,7 +40,7 @@ export const ClientPage = () => {
   }
   useEffect(() => {
     getClinet()
-  }, [client, isUpdating])
+  }, [isUpdating])
   if (client) {
     return (
       <>
@@ -170,6 +170,12 @@ export const ClientPage = () => {
                   Suprimmer
                 </button>
               )}
+              <button
+                className="btn btn-success float-right"
+                style={{ float: 'right' }}
+              >
+                Voir Commandes
+              </button>
             </div>
           </div>
         </div>

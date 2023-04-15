@@ -26,7 +26,7 @@
     "eject": "react-scripts eject",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start \" \"npm run electron:start\"",
     "electron:build": "yarn build && electron-builder -c.extraMetadata.main=build/main.js",
-    "electron:start": "electron ."
+    "electron:start": "wait-on http://127.0.0.1:3000 && electron ."
   },
   "eslintConfig": {
     "extends": [

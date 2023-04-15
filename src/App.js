@@ -1,5 +1,5 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { createContext, useEffect, useState } from 'react'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import { Sidebar } from './components/Sidebar'
 import { Clients } from './pages/Client/Clients'
 import { Nav } from './components/Nav'
@@ -9,11 +9,17 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ClientPage } from './pages/Client/ClientPage'
 import { Products } from './pages/Product/Products'
 import { AddProduct } from './pages/Product/AddProduct'
-import { Product } from './components/Product'
 import { ProductPage } from './pages/Product/ProductPage'
 import { LogIn } from './pages/logIn'
 import { SearchResults } from './pages/SearchResults'
+import { Orders } from './pages/Order/Orders'
+import { AddOrder } from './pages/Order/AddOrder'
+export const Token = createContext(null)
 function App() {
+  const [token, setToken] = useState()
+  useEffect(() => {
+    setToken(sessionStorage.getItem('Token'))
+  })
   return (
     <>
       <BrowserRouter>
@@ -29,19 +35,55 @@ function App() {
           pauseOnHover
           theme="light"
         />
-
-        <Sidebar />
-        <Nav />
-        <Routes>
-          <Route path="/" element={<LogIn />} />
-          <Route path="/Clients" element={<Clients />} />
-          <Route path="/AjouterClient" element={<AddClient />} />
-          <Route path="/Client" element={<ClientPage />} />
-          <Route path="/Produits" element={<Products />} />
-          <Route path="/AjouterProduit" element={<AddProduct />} />
-          <Route path="/Product" element={<ProductPage />} />
-          <Route path="/Résultats" element={<SearchResults />} />
-        </Routes>
+        <Token.Provider value={setToken}>
+          {token == null ? (
+            ''
+          ) : (
+            <>
+              <Sidebar />
+              <Nav />
+            </>
+          )}
+          <Routes>
+            <Route path="/" element={<LogIn />} />
+            <Route
+              path="/Clients"
+              element={token !== null ? <Clients /> : <LogIn />}
+            />
+            <Route
+              path="/AjouterClient"
+              element={token !== null ? <AddClient /> : <LogIn />}
+            />
+            <Route
+              path="/Client"
+              element={token !== null ? <ClientPage /> : <LogIn />}
+            />
+            <Route
+              path="/Produits"
+              element={token !== null ? <Products /> : <LogIn />}
+            />
+            <Route
+              path="/AjouterProduit"
+              element={token !== null ? <AddProduct /> : <LogIn />}
+            />
+            <Route
+              path="/Product"
+              element={token !== null ? <ProductPage /> : <LogIn />}
+            />
+            <Route
+              path="/Résultats"
+              element={token !== null ? <SearchResults /> : <LogIn />}
+            />
+            <Route
+              path="/Commandes"
+              element={token !== null ? <Orders /> : <LogIn />}
+            />
+            <Route
+              path="/CreeCommande"
+              element={token !== null ? <AddOrder /> : <LogIn />}
+            />
+          </Routes>
+        </Token.Provider>
       </BrowserRouter>
     </>
   )

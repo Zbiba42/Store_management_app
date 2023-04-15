@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './sideBar.css'
+import { Token } from '../App'
 export const Sidebar = () => {
   const [clicked, setClicked] = useState(false)
   const location = window.location.pathname
-
+  const setToken = useContext(Token)
   return (
     <>
       <div className="sideBar">
@@ -68,7 +69,13 @@ export const Sidebar = () => {
 
           <div className="foot">
             <div className="link">
-              <Link to={'/'}>
+              <Link
+                to={'/'}
+                onClick={() => {
+                  sessionStorage.removeItem('Token')
+                  setToken('')
+                }}
+              >
                 <i className="fas fa-sign-out-alt"></i>Logout
               </Link>
             </div>

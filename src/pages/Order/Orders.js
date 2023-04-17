@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import PocketBase from 'pocketbase'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { Product } from '../../components/Product'
 import { toast } from 'react-toastify'
+import { Order } from '../../components/Order'
 export const Orders = () => {
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState()
@@ -43,8 +42,8 @@ export const Orders = () => {
               </tr>
             </thead>
             <tbody>
-              {Orders.map((product) => {
-                console.log(product)
+              {Orders.map((order) => {
+                return <Order order={order} />
               })}
             </tbody>
           </table>

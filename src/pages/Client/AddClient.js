@@ -20,24 +20,64 @@ export const AddClient = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // You can handle form submission here, e.g. call an API to add client data
-    // using formData object
-    try {
-      const record = await pb.collection('clients').create(formData)
-      toast.success('client créé avec succès')
-    } catch (error) {
-      toast.error(error.message)
+    const validated = {}
+
+    // Perform validation on the form data
+    if (formData.nom === '') {
+      toast.error('Le nom ne peut pas être vide ! ')
+    } else {
+      validated.nom = true
     }
-    navigate('/Clients')
-    // Reset form data
-    setFormData({
-      nom: '',
-      prenom: '',
-      email: '',
-      age: '',
-      sexe: 'Masculin',
-      cin: '',
-    })
+
+    if (formData.prenom === '') {
+      toast.error('Le prénom ne peut pas être vide ! ')
+    } else {
+      validated.prenom = true
+    }
+
+    if (formData.email === '') {
+      toast.error("L'email ne peut pas être vide ! ")
+    } else {
+      validated.email = true
+    }
+
+    if (formData.age === '') {
+      toast.error("L'âge ne peut pas être vide ! ")
+    } else {
+      validated.age = true
+    }
+
+    if (formData.cin === '') {
+      toast.error('Le CIN ne peut pas être vide ! ')
+    } else {
+      validated.cin = true
+    }
+
+    // Check if the form is valid
+    if (
+      validated.cin === true &&
+      validated.age === true &&
+      validated.email === true &&
+      validated.prenom === true &&
+      validated.nom === true
+    ) {
+      try {
+        const record = await pb.collection('clients').create(formData)
+        toast.success('client créé avec succès')
+      } catch (error) {
+        toast.error(error.message)
+      }
+      navigate('/Clients')
+      // Reset form data
+      setFormData({
+        nom: '',
+        prenom: '',
+        email: '',
+        age: '',
+        sexe: 'Masculin',
+        cin: '',
+      })
+    }
   }
   return (
     <>
@@ -58,7 +98,6 @@ export const AddClient = () => {
           <div className="form-group">
             <label htmlFor="prenom">Prénom:</label>
             <input
-              required
               type="text"
               className="form-control"
               id="prenom"

@@ -43,7 +43,7 @@ export const Orders = () => {
             </thead>
             <tbody>
               {Orders.map((order) => {
-                return <Order order={order} />
+                return <Order order={order} key={order.id} />
               })}
             </tbody>
           </table>

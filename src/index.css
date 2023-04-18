@@ -36,9 +36,9 @@ body{
   float: left;
   /* background-color: grey; */
   width: 82%;
-  height: calc(100% - 80px);
+  max-height: 85%;
   padding: 0px 20px 0px 20px;
-  overflow: scroll;
+ overflow: scroll;
 }
 .container::-webkit-scrollbar {
   display: none;

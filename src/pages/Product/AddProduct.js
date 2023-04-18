@@ -24,25 +24,59 @@ export const AddProduct = () => {
       prix: parseInt(productRef.current.prix.value),
       objetsRestants: parseInt(productRef.current.objetsRestants.value),
     }
+    let isValid = true
 
-    // Do something with the product data
+    // Perform validation on the productData object
+    if (!productData.images) {
+      toast.error("L'image ne peut pas être vide ! ")
+      isValid = false
+    }
 
-    // ...submit data to server, update state, etc.
-    const formData = new FormData()
-    formData.append('image', productData.images)
-    formData.append('nom', productData.nom)
-    formData.append('marque', productData.marque)
-    formData.append('description', productData.description)
-    formData.append('prix', productData.prix)
-    formData.append('objetsRestants', productData.objetsRestants)
-    console.log(formData)
-    const pb = new PocketBase('http://127.0.0.1:8090')
-    try {
-      const record = await pb.collection('products').create(formData)
-      toast.success('produit créé avec succès !')
-    } catch (error) {
-      console.log()
-      toast.error(error.message)
+    if (productData.nom === '') {
+      toast.error('Le nom ne peut pas être vide ! ')
+      isValid = false
+    }
+
+    if (productData.marque === '') {
+      toast.error('La marque ne peut pas être vide ! ')
+      isValid = false
+    }
+
+    if (productData.description === '') {
+      toast.error('La description ne peut pas être vide ! ')
+      isValid = false
+    }
+
+    if (isNaN(productData.prix) || productData.prix <= 0) {
+      toast.error('Le prix doit être un nombre positif ! ')
+      isValid = false
+    }
+
+    if (isNaN(productData.objetsRestants) || productData.objetsRestants < 0) {
+      toast.error(
+        "Le nombre d'objets restants doit être un nombre positif ou nul ! "
+      )
+      isValid = false
+    }
+
+    // Check if the productData is valid
+    if (isValid) {
+      const formData = new FormData()
+      formData.append('image', productData.images)
+      formData.append('nom', productData.nom)
+      formData.append('marque', productData.marque)
+      formData.append('description', productData.description)
+      formData.append('prix', productData.prix)
+      formData.append('objetsRestants', productData.objetsRestants)
+      console.log(formData)
+      const pb = new PocketBase('http://127.0.0.1:8090')
+      try {
+        const record = await pb.collection('products').create(formData)
+        toast.success('produit créé avec succès !')
+      } catch (error) {
+        console.log()
+        toast.error(error.message)
+      }
     }
   }
   return (

@@ -72,23 +72,14 @@ export const AddOrder = () => {
       client: false,
       products: false,
     }
-    const productsIds = pickedProducts.flatMap((product) => {
-      // Use Array.from to create an array with the product ID repeated based on its quantity
-      return Array.from({ length: product.quantity }, () => product.id)
-    })
-    let idString = ''
-    productsIds.forEach((id) => {
-      idString += `${id}/`
-    })
 
     const Order = {
       date: dateRef.current.value,
       client: pickedClient.id,
-      produits: idString,
+      produits: JSON.stringify(pickedProducts),
       total: total,
     }
-    console.log(Order)
-    if (Order.date == null) {
+    if (Order.date == '') {
       toast.error('la date ne peut pas être vide ! ')
     } else {
       validated.date = true
@@ -98,13 +89,18 @@ export const AddOrder = () => {
     } else {
       validated.client = true
     }
-    if (Order.produits.length == 0) {
+    if (pickedProducts.length == 0) {
       toast.error('le nombre de produits ne peut pas être 0')
     } else {
       validated.products = true
     }
     if (validated.date && validated.client && validated.products) {
       try {
+        pickedProducts.map(async (product) => {
+          const record = await pb.collection('products').update(product.id, {
+            objetsRestants: product.objetsRestants - product.quantity,
+          })
+        })
         const record = await pb.collection('orders').create(Order)
         toast.success('commande créée avec succès !')
         navigate('/Commandes')

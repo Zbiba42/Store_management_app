@@ -15,6 +15,7 @@ import { SearchResults } from './pages/SearchResults'
 import { Orders } from './pages/Order/Orders'
 import { AddOrder } from './pages/Order/AddOrder'
 import { OrderPage } from './pages/Order/OrderPage'
+import { ClientOrders } from './pages/Client/ClientOrders'
 export const Token = createContext(null)
 function App() {
   const [token, setToken] = useState()
@@ -86,6 +87,10 @@ function App() {
             <Route
               path="/Commande"
               element={token !== null ? <OrderPage /> : <LogIn />}
+            />
+            <Route
+              path="/ClientCommandes"
+              element={token !== null ? <ClientOrders /> : <LogIn />}
             />
           </Routes>
         </Token.Provider>

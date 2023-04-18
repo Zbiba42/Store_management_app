@@ -38,6 +38,9 @@ export const ClientPage = () => {
       toast.error(error.message)
     }
   }
+  const GotoCommandes = async () => {
+    navigate('/ClientCommandes', { state: client })
+  }
   useEffect(() => {
     getClinet()
   }, [isUpdating])
@@ -173,6 +176,7 @@ export const ClientPage = () => {
               <button
                 className="btn btn-success float-right"
                 style={{ float: 'right' }}
+                onClick={GotoCommandes}
               >
                 Voir Commandes
               </button>

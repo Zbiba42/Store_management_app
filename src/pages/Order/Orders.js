@@ -11,7 +11,7 @@ export const Orders = () => {
   const getData = async () => {
     try {
       const { data } = await axios.get(
-        `http://127.0.0.1:8090/api/collections/orders/records?sort=${sort}&page=${page}&perPage=5`
+        `http://127.0.0.1:8090/api/collections/orders/records?sort=+updated&page=${page}&perPage=5`
       )
       setOrders(data.items)
       setPage(data.page)

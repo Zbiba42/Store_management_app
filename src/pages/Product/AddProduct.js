@@ -71,7 +71,7 @@ export const AddProduct = () => {
       console.log(formData)
       const pb = new PocketBase('http://127.0.0.1:8090')
       try {
-        const record = await pb.collection('products').create(formData)
+        await pb.collection('products').create(formData)
         toast.success('produit créé avec succès !')
       } catch (error) {
         console.log()

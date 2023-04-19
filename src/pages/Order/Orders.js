@@ -49,7 +49,7 @@ export const Orders = () => {
           </table>
         </div>
         <div className="pagination">
-          {page == 1 ? (
+          {page === 1 ? (
             <button className="pagination-btn" disabled="true">
               &lt; Go back
             </button>

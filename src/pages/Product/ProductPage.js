@@ -41,9 +41,7 @@ export const ProductPage = () => {
       formData.append('objetsRestants', productData.objetsRestants)
 
       try {
-        const record = await pb
-          .collection('products')
-          .update(product.id, formData)
+        await pb.collection('products').update(product.id, formData)
         toast.success('produit modifier avec succès !')
         setIsUpdating(false)
       } catch (error) {
@@ -60,9 +58,7 @@ export const ProductPage = () => {
       console.log(formData)
 
       try {
-        const record = await pb
-          .collection('products')
-          .update(product.id, formData)
+        await pb.collection('products').update(product.id, formData)
         toast.success('produit modifier avec succès !')
         setIsUpdating(false)
       } catch (error) {
@@ -105,7 +101,7 @@ export const ProductPage = () => {
               <img
                 src={path}
                 className="card-img-top mx-auto"
-                alt="Product Image"
+                alt="Product Img"
                 style={{ width: '300px' }}
               />
             )}

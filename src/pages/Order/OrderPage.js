@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import PocketBase from 'pocketbase'
-import { toast } from 'react-toastify'
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+
 import axios from 'axios'
 
 import { OrderProduct } from '../../components/OrderProduct'
@@ -12,9 +11,6 @@ export const OrderPage = () => {
   const [Client, setClient] = useState()
   const [Products, setProducts] = useState([])
   const order = location.state
-  const navigate = useNavigate()
-  const Data = useRef({})
-  const pb = new PocketBase('http://127.0.0.1:8090')
 
   const getClient = async () => {
     const client = await axios.get(

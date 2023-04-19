@@ -1,14 +1,11 @@
 import React, { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-
 import './Nav.css'
 
 export const Nav = () => {
   const navigate = useNavigate()
   const searchInput = useRef()
   const SearchCollection = useRef()
-
   const Search = async () => {
     const searchTerm = searchInput.current.value
     const Collection = SearchCollection.current.value

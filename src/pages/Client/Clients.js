@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import PocketBase from 'pocketbase'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import './Clients.css'
@@ -9,7 +8,7 @@ export const Clients = () => {
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState()
   const [clients, setClients] = useState([])
-  const pb = new PocketBase('http://127.0.0.1:8090')
+
   const getData = async () => {
     try {
       const { data } = await axios.get(
@@ -53,7 +52,7 @@ export const Clients = () => {
           </table>
         </div>
         <div className="pagination">
-          {page == 1 ? (
+          {page === 1 ? (
             <button className="pagination-btn" disabled="true">
               &lt; Go back
             </button>

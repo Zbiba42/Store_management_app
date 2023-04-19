@@ -62,7 +62,7 @@ export const AddClient = () => {
       validated.nom === true
     ) {
       try {
-        const record = await pb.collection('clients').create(formData)
+        await pb.collection('clients').create(formData)
         toast.success('client créé avec succès')
       } catch (error) {
         toast.error(error.message)

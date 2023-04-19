@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import PocketBase from 'pocketbase'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { Client } from '../../components/Client'
 import { Product } from '../../components/Product'
 import { toast } from 'react-toastify'
 export const Products = () => {
@@ -10,7 +9,7 @@ export const Products = () => {
   const [totalPages, setTotalPages] = useState()
   const [products, setProducts] = useState([])
   const [sort, setSort] = useState('')
-  const pb = new PocketBase('http://127.0.0.1:8090')
+
   const getData = async () => {
     try {
       const { data } = await axios.get(
@@ -152,7 +151,7 @@ export const Products = () => {
           </table>
         </div>
         <div className="pagination">
-          {page == 1 ? (
+          {page === 1 ? (
             <button className="pagination-btn" disabled="true">
               &lt; Go back
             </button>

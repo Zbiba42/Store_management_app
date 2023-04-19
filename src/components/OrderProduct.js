@@ -6,7 +6,12 @@ export const OrderProduct = ({ product }) => {
     <>
       <tr>
         <td>
-          <img src={path} class="img-thumbnail" style={{ width: '100px' }} />
+          <img
+            src={path}
+            class="img-thumbnail"
+            style={{ width: '100px' }}
+            alt="Img"
+          />
         </td>
         <td style={{ verticalAlign: 'middle' }}>{product.nom}</td>
         <td style={{ verticalAlign: 'middle' }}>{product.marque}</td>

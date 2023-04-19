@@ -21,10 +21,10 @@ export const Order = ({ order }) => {
     return (
       <>
         <tr onClick={GotoPage}>
-          <td scope="col">{order.date}</td>
-          <td scope="col">{Client.nom + ' ' + Client.prenom}</td>
-          <td scope="col">{JSON.parse(order.produits).length}</td>
-          <td scope="col">{order.total + ' MAD'}</td>
+          <td>{order.date}</td>
+          <td>{Client.nom + ' ' + Client.prenom}</td>
+          <td>{JSON.parse(order.produits).length}</td>
+          <td>{order.total + ' MAD'}</td>
         </tr>
       </>
     )

@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Sidebar } from './components/Sidebar'
 import { Clients } from './pages/Client/Clients'
 import { Nav } from './components/Nav'
@@ -21,7 +21,7 @@ function App() {
   const [token, setToken] = useState()
   useEffect(() => {
     setToken(sessionStorage.getItem('Token'))
-  })
+  }, [token])
   return (
     <>
       <BrowserRouter>

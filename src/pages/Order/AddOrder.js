@@ -79,17 +79,17 @@ export const AddOrder = () => {
       produits: JSON.stringify(pickedProducts),
       total: total,
     }
-    if (Order.date == '') {
+    if (Order.date === '') {
       toast.error('la date ne peut pas être vide ! ')
     } else {
       validated.date = true
     }
-    if (Order.client == null) {
+    if (Order.client === null) {
       toast.error('client ne peut pas être vide ')
     } else {
       validated.client = true
     }
-    if (pickedProducts.length == 0) {
+    if (pickedProducts.length === 0) {
       toast.error('le nombre de produits ne peut pas être 0')
     } else {
       validated.products = true
@@ -97,11 +97,11 @@ export const AddOrder = () => {
     if (validated.date && validated.client && validated.products) {
       try {
         pickedProducts.map(async (product) => {
-          const record = await pb.collection('products').update(product.id, {
+          await pb.collection('products').update(product.id, {
             objetsRestants: product.objetsRestants - product.quantity,
           })
         })
-        const record = await pb.collection('orders').create(Order)
+        await pb.collection('orders').create(Order)
         toast.success('commande créée avec succès !')
         navigate('/Commandes')
       } catch (error) {
@@ -234,6 +234,7 @@ export const AddOrder = () => {
                               src={path}
                               class="img-thumbnail"
                               style={{ width: '100px' }}
+                              alt="Img"
                             />
                           </td>
                           <td style={{ verticalAlign: 'middle' }}>

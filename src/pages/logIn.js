@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef } from 'react'
 import PocketBase from 'pocketbase'
 import './login.css'
 import { toast } from 'react-toastify'
-import { redirect, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Token } from '../App'
 
 export const LogIn = () => {

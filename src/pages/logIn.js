@@ -17,7 +17,6 @@ export const LogIn = () => {
       const authData = await pb
         .collection('users')
         .authWithPassword(Email.current.value, Password.current.value)
-      console.log(authData)
       sessionStorage.setItem('Token', authData.token)
       setToken(authData.token)
       toast.success('logged in succsesfully')

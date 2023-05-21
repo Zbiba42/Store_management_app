@@ -25,3 +25,4 @@ Run `npm run electron:serve` to start the react app in a desktop app development
 you can also run `npm start` to start it in the browser
 
 ## building the app
+## building the app

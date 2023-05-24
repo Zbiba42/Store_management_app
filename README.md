@@ -13,16 +13,17 @@ Run `npm i` to install all the dependencies.
 ## Runing Pocketbase db migrations
 
 The [pb_migrations](api/pb_migrations) folder contain migrations scripts that will create all the collections necessary for the app to work.
-Go the [api directory](api) and run `./pocketbase migrate`.
+
+Go to the [api directory](api) and run `./pocketbase migrate`.
 
 ## Starting Pocketbase server
 
-run `./pocketbase serve` to start pocketbase server.
+Run `./pocketbase serve` to start pocketbase server.
 
 ## Starting the app
 
 Run `npm run electron:serve` to start the react app in a desktop app development server.
-you can also run `npm start` to start it in the browser
 
-## building the app
+You can also run `npm start` to start it in the browser.
+
 ## building the app
